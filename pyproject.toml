@@ -5,7 +5,7 @@ description = "Library for terminal programs to ask users questions."
 authors = ["Thomas M Ward <thomas@thomasward.com>"]
 license = "ISCL"
 readme = "README.md"
-repository = "https://github.com/tmward/pypask"
+repository = "https://github.com/tmward/pyask"
 
 
 [tool.poetry.dependencies]
