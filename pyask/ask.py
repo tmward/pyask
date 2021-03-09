@@ -1,3 +1,6 @@
+from functools import partial
+
+
 def print_choices(choices):
     sig_figs = len(str(len(choices)))
     print("Available choices are:")
@@ -11,10 +14,14 @@ def prompt(question, default="", aide=""):
     return f"{question.rstrip('?')}? [{default}] "
 
 
-def not_empty_str(string):
-    if string:
-        return string
-    raise ValueError("String is empty!")
+def process(func, valid, x):
+    processed_x = func(x)
+    if valid(x):
+        return x
+    raise ValueError(f"{x} is not valid.")
+
+
+not_empty_str = partial(process, str, lambda s: s != "")
 
 
 def ask(question, default="", aide="", process_func=not_empty_str, choices=None):
