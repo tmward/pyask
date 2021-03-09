@@ -1,7 +1,8 @@
 def print_choices(choices):
+    sig_figs = len(str(len(choices)))
     print("Available choices are:")
     for i, choice in enumerate(choices, 1):
-        print(f"({i}) {choice}")
+        print(f"({i:>{sig_figs}}) {choice}")
 
 
 def prompt(question, default="", aide=""):
