@@ -1,5 +1,8 @@
-from .ask import ask, process, always_true
+"""Functions to ask questions with numeric answers on the terminal."""
+
 from functools import partial
+
+from ask import ask, process, always_true
 
 
 def to_number(s):
@@ -8,60 +11,78 @@ def to_number(s):
         return float(s)
     return int(s)
 
-def between(l, r):
-    """Returns pred function to test if a numeric is between l and r (inclusive)."""
-    return lambda n: l <= n <= r
-
 
 def integer(question, default="", aide="enter an integer"):
+    """Asks user for an integer."""
     p_func = partial(process, int, always_true)
     return ask(question, default=default, aide=aide, process_func=p_func)
 
 
 def decimal(question, default="", aide="enter a decimal"):
+    """Asks user for a decimal."""
     p_func = partial(process, float, always_true)
     return ask(question, default=default, aide=aide, process_func=p_func)
 
 
 def number(question, default="", aide="enter a number"):
+    """Asks user for any number."""
     p_func = partial(process, to_number, always_true)
     return ask(question, default=default, aide=aide, process_func=p_func)
 
 
-def positive_integer(question, default="", aide="enter a positive integer"):
-    p_func = partial(process, int, lambda i: 0 < i)
-    return ask(question, default=default, aide=aide, process_func=p_func)
-
-
-def natural_number(question, default="", aide="enter a natural number"):
-    p_func = partial(process, int, lambda i: 0 <= i)
-    return ask(question, default=default, aide=aide, process_func=p_func)
-
-
-def positive_number(question, default="", aide="enter a positive number"):
-    p_func = partial(process, to_number, lambda n: 0 < n)
-    return ask(question, default=default, aide=aide, process_func=p_func)
-
-
-def negative_number(question, default="", aide="enter a negative number"):
-    p_func = partial(process, to_number, lambda n: n < 0)
-    return ask(question, default=default, aide=aide, process_func=p_func)
-
-
-def negative_integer(question, default="", aide="enter a negative integer"):
-    p_func = partial(process, int, lambda i: i < 0)
-    return ask(question, default=default, aide=aide, process_func=p_func)
-
-
-def integer_between(question, l, r, default="", aide=""):
+def number_between(l, r, question, only_int=False, aide="", **kwargs):
+    """Asks user for a number between l and r, inclusive."""
+    value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
-        aide = f"enter integer between {l} and {r} (inclusive)"
-    p_func = partial(process, int, between(l, r))
-    return ask(question, default=default, aide=aide, process_func=p_func)
+        aide = f"enter {value_type} between {l} and {r}, inclusive"
+    p_func = partial(process, parser, lambda n: l <= n <= r)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def number_between(question, l, r, default="", aide=""):
+def number_greater_than(l, question, only_int=False, default="", aide=""):
+    """Asks user for number greater than l."""
+    value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
-        aide = f"enter number between {l} and {r} (inclusive)"
-    p_func = partial(process, to_number, between(l, r))
+        aide = f"enter {value_type} greater than {l}"
+    p_func = partial(process, parser, lambda n: l < n)
     return ask(question, default=default, aide=aide, process_func=p_func)
+
+
+def number_greater_than_or_eq(l, question, only_int=False, default="", aide=""):
+    """Asks user for number greater than or equal to l."""
+    value_type, parser = ("integer", int) if only_int else ("number", to_number)
+    if aide == "":
+        aide = f"enter {value_type} >= {l}"
+    p_func = partial(process, parser, lambda n: l <= n)
+    return ask(question, default=default, aide=aide, process_func=p_func)
+
+
+def number_less_than(r, question, only_int=False, default="", aide=""):
+    """Asks user for number less than r."""
+    value_type, parser = ("integer", int) if only_int else ("number", to_number)
+    if aide == "":
+        aide = f"enter {value_type} less than {r}"
+    p_func = partial(process, parser, lambda n: n < r)
+    return ask(question, default=default, aide=aide, process_func=p_func)
+
+
+def number_less_than_or_eq(r, question, only_int=False, default="", aide=""):
+    """Asks user for number less than or equal to r."""
+    value_type, parser = ("integer", int) if only_int else ("number", to_number)
+    if aide == "":
+        aide = f"enter {value_type} <= {r}"
+    p_func = partial(process, parser, lambda n: n <= r)
+    return ask(question, default=default, aide=aide, process_func=p_func)
+
+
+def number_eq_to(n, question, default="", aide="enter the correct number"):
+    """Asks user for number equal to n."""
+    p_func = partial(process, to_number, lambda x: n == x)
+    return ask(question, default=default, aide=aide, process_func=p_func)
+
+
+positive_number = partial(number_greater_than, 0)
+negative_number = partial(number_less_than, 0)
+positive_integer = partial(number_greater_than, 0, only_int=True)
+negative_integer = partial(number_less_than, 0, only_int=True)
+natural_number = partial(number_greater_than_or_eq, 0, only_int=True)
