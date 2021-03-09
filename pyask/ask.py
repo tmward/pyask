@@ -16,9 +16,13 @@ def prompt(question, default="", aide=""):
 
 def process(func, valid, x):
     processed_x = func(x)
-    if valid(x):
-        return x
+    if valid(processed_x):
+        return processed_x
     raise ValueError(f"{x} is not valid.")
+
+
+def always_true(*args, **kwargs):
+    return True
 
 
 not_empty_str = partial(process, str, lambda s: s != "")
