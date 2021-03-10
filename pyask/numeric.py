@@ -2,7 +2,7 @@
 
 from functools import partial
 
-from ask import ask, process, always_true
+from .ask import ask, process, always_true
 
 
 def to_number(s):
@@ -86,3 +86,29 @@ negative_number = partial(number_less_than, 0)
 positive_integer = partial(number_greater_than, 0, only_int=True)
 negative_integer = partial(number_less_than, 0, only_int=True)
 natural_number = partial(number_greater_than_or_eq, 0, only_int=True)
+
+
+def to_seconds(s):
+    """Takes str s in HH:MM:SS, MM:SS, or SS format and returns total seconds (integer)."""
+    ssmmhh = [int(n) for n in reversed(s.split(":"))]
+    # only [SS]; we allow user to give us any positive number of seconds
+    if len(ssmmhh) == 1 and ssmmhh[0] >= 0:
+        return ssmmhh[0]
+    # [SS, MM]
+    elif len(ssmmhh) == 2 and ssmmhh[0] in range(60) and ssmmhh[1] in range(60):
+        return ssmmhh[0] + ssmmhh[1] * 60
+    # [SS, MM, HH]
+    elif (
+        len(ssmmhh) == 3
+        and ssmmhh[0] in range(60)
+        and ssmmhh[1] in range(60)
+        and ssmmhh[2] >= 0
+    ):
+        return ssmmhh[0] + ssmmhh[1] * 60 + ssmmhh[2] * 3600
+    raise ValueError(f"{s} is not a valid time.")
+
+
+def seconds(question, default="", aide="enter time in HH:MM:SS, MM:SS, or SS format"):
+    """Asks user for time."""
+    p_func = partial(process, to_seconds, always_true)
+    return ask(question, default=default, aide=aide, process_func=p_func)
