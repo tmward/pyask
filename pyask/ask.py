@@ -31,10 +31,10 @@ def always_true(*args, **kwargs):
     return True
 
 
-not_empty_str = partial(process, str, lambda s: s != "")
+whatever = partial(process, str, always_true)
 
 
-def ask(question, default="", aide="", process_func=not_empty_str, choices=None):
+def ask(question, default="", aide="", process_func=whatever, choices=None):
     """Returns user answer to question once they enter a valid response."""
     if choices is not None:
         print_choices(choices)
