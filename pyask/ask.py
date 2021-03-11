@@ -2,6 +2,8 @@
 
 from functools import partial
 
+__all__ = ("ask",)
+
 
 def print_choices(choices):
     """Pretty prints choices on terminal with option numbers."""
