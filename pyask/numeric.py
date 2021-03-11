@@ -49,16 +49,16 @@ def number(question, default="", aide="enter a number"):
     return ask(question, default=default, aide=aide, process_func=p_func)
 
 
-def number_between(l, r, question, only_int=False, aide="", **kwargs):
+def number_between(l, r, question, default="", aide="", only_int=False):
     """Asks user for a number between l and r, inclusive."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
         aide = f"enter {value_type} between {l} and {r}, inclusive"
     p_func = partial(process, parser, lambda n: l <= n <= r)
-    return ask(question, aide=aide, process_func=p_func, **kwargs)
+    return ask(question, default=default, aide=aide, process_func=p_func)
 
 
-def number_greater_than(l, question, only_int=False, default="", aide=""):
+def number_greater_than(l, question, default="", aide="", only_int=False):
     """Asks user for number greater than l."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
@@ -67,7 +67,7 @@ def number_greater_than(l, question, only_int=False, default="", aide=""):
     return ask(question, default=default, aide=aide, process_func=p_func)
 
 
-def number_greater_than_or_eq(l, question, only_int=False, default="", aide=""):
+def number_greater_than_or_eq(l, question, default="", aide="", only_int=False):
     """Asks user for number greater than or equal to l."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
@@ -76,7 +76,7 @@ def number_greater_than_or_eq(l, question, only_int=False, default="", aide=""):
     return ask(question, default=default, aide=aide, process_func=p_func)
 
 
-def number_less_than(r, question, only_int=False, default="", aide=""):
+def number_less_than(r, question, default="", aide="", only_int=False):
     """Asks user for number less than r."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
@@ -85,7 +85,7 @@ def number_less_than(r, question, only_int=False, default="", aide=""):
     return ask(question, default=default, aide=aide, process_func=p_func)
 
 
-def number_less_than_or_eq(r, question, only_int=False, default="", aide=""):
+def number_less_than_or_eq(r, question, default="", aide="", only_int=False):
     """Asks user for number less than or equal to r."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
