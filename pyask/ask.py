@@ -7,9 +7,9 @@ __all__ = ("ask",)
 
 def print_choices(choices):
     """Pretty prints choices on terminal with option numbers."""
-    sig_figs = len(str(len(choices)))
+    sig_figs = len(str(len(choices) - 1))
     print("Available choices are:")
-    for i, choice in enumerate(choices, 1):
+    for i, choice in enumerate(choices):
         print(f"({i:>{sig_figs}}) {choice}")
 
 
