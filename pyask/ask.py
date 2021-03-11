@@ -13,7 +13,7 @@ def print_choices(choices):
         print(f"({i:>{sig_figs}}) {choice}")
 
 
-def prompt(question, default="", aide=""):
+def prompt(question, aide="", default=""):
     """Constructs question prompt."""
     if aide:
         return f"{question.rstrip('?')}? ({aide}) [{default}] "
@@ -36,15 +36,15 @@ def always_true(*args, **kwargs):
 whatever = partial(process, str, always_true)
 
 
-def ask(question, default="", aide="", process_func=whatever, choices=None):
+def ask(question, aide="", default="", process_func=whatever, choices=None):
     """Returns user answer to question once they enter a valid response."""
     if choices is not None:
         print_choices(choices)
-    response = input(prompt(question, default, aide)).strip()
+    response = input(prompt(question, aide, default)).strip()
     if response == "":
         response = default
     try:
         return process_func(response)
     except (KeyError, ValueError):
         print("Invalid respose.")
-        return ask(question, default, aide, process_func, choices)
+        return ask(question, aide, default, process_func, choices)

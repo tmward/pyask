@@ -31,73 +31,73 @@ def to_number(s):
     return int(s)
 
 
-def integer(question, default="", aide="enter an integer"):
+def integer(question, aide="enter an integer", **kwargs):
     """Asks user for an integer."""
     p_func = partial(process, int, always_true)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def decimal(question, default="", aide="enter a decimal"):
+def decimal(question, aide="enter a decimal", **kwargs):
     """Asks user for a decimal."""
     p_func = partial(process, float, always_true)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def number(question, default="", aide="enter a number"):
+def number(question, aide="enter a number", **kwargs):
     """Asks user for any number."""
     p_func = partial(process, to_number, always_true)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def number_between(l, r, question, default="", aide="", only_int=False):
+def number_between(l, r, question, aide="", only_int=False, **kwargs):
     """Asks user for a number between l and r, inclusive."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
         aide = f"enter {value_type} between {l} and {r}, inclusive"
     p_func = partial(process, parser, lambda n: l <= n <= r)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def number_greater_than(l, question, default="", aide="", only_int=False):
+def number_greater_than(l, question, aide="", only_int=False, **kwargs):
     """Asks user for number greater than l."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
         aide = f"enter {value_type} greater than {l}"
     p_func = partial(process, parser, lambda n: l < n)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def number_greater_than_or_eq(l, question, default="", aide="", only_int=False):
+def number_greater_than_or_eq(l, question, aide="", only_int=False, **kwargs):
     """Asks user for number greater than or equal to l."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
         aide = f"enter {value_type} >= {l}"
     p_func = partial(process, parser, lambda n: l <= n)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def number_less_than(r, question, default="", aide="", only_int=False):
+def number_less_than(r, question, aide="", only_int=False, **kwargs):
     """Asks user for number less than r."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
         aide = f"enter {value_type} less than {r}"
     p_func = partial(process, parser, lambda n: n < r)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def number_less_than_or_eq(r, question, default="", aide="", only_int=False):
+def number_less_than_or_eq(r, question, aide="", only_int=False, **kwargs):
     """Asks user for number less than or equal to r."""
     value_type, parser = ("integer", int) if only_int else ("number", to_number)
     if aide == "":
         aide = f"enter {value_type} <= {r}"
     p_func = partial(process, parser, lambda n: n <= r)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def number_eq_to(n, question, default="", aide="enter the correct number"):
+def number_eq_to(n, question, aide="enter the correct number", **kwargs):
     """Asks user for number equal to n."""
     p_func = partial(process, to_number, lambda x: n == x)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
 positive_number = partial(number_greater_than, 0)
@@ -127,7 +127,7 @@ def to_seconds(s):
     raise ValueError(f"{s} is not a valid time.")
 
 
-def seconds(question, default="", aide="enter time in HH:MM:SS, MM:SS, or SS format"):
+def seconds(question, aide="enter time in HH:MM:SS, MM:SS, or SS format", **kwargs):
     """Asks user for time."""
     p_func = partial(process, to_seconds, always_true)
-    return ask(question, default=default, aide=aide, process_func=p_func)
+    return ask(question, aide=aide, process_func=p_func, **kwargs)
