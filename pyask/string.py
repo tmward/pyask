@@ -4,7 +4,8 @@ from functools import partial
 import re
 from operator import contains, eq
 
-from .ask import ask, process, always_true
+from .ask import ask
+from .utils import always_true, process
 
 __all__ = ("string", "char", "yes_no", "string_regex")
 

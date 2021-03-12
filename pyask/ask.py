@@ -2,6 +2,8 @@
 
 from functools import partial
 
+from .utils import always_true, process
+
 __all__ = ("ask",)
 
 
@@ -18,19 +20,6 @@ def prompt(question, aide="", default=""):
     if aide:
         return f"{question.rstrip('?')}? ({aide}) [{default}] "
     return f"{question.rstrip('?')}? [{default}] "
-
-
-def process(func, valid, s):
-    """Processes s with func then validates it with valid."""
-    x = func(s)
-    if valid(x):
-        return x
-    raise ValueError(f"{s} is not valid.")
-
-
-def always_true(*args, **kwargs):
-    """Always returns True, no matter the arguments."""
-    return True
 
 
 whatever = partial(process, str, always_true)

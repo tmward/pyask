@@ -2,7 +2,8 @@
 
 from functools import partial
 
-from .ask import ask, process, always_true
+from .ask import ask
+from .utils import always_true, process
 
 
 __all__ = (
