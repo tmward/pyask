@@ -3,7 +3,7 @@
 import re
 
 
-__all__ = ("always_true", "process", "items")
+__all__ = ("always_true", "process", "items", "ns_between")
 
 
 def always_true(*args, **kwargs):
@@ -22,3 +22,7 @@ def process(func, valid, s):
 def items(s, func=str):
     """Returns items processed by func in a comma or space delimited string."""
     return [func(x) for x in re.split(r"\s*,\s*|\s+", s)]
+
+def ns_between(l, r, ns):
+    """Checks if all ns are between l and r (inclusive)."""
+    return all(l <= n <= r for n in ns)

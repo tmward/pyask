@@ -2,7 +2,7 @@
 
 from functools import partial
 import re
-from operator import contains, eq
+from operator import contains
 
 from .ask import ask
 from .utils import always_true, process
@@ -10,23 +10,15 @@ from .utils import always_true, process
 __all__ = ("string", "char", "yes_no", "string_regex")
 
 
-def string(question, aide="", allow_empty=False, **kwargs):
+def string(question, aide="enter a string", **kwargs):
     """Asks user for a string response."""
-    value_type, valid_f = (
-        ("any string", always_true)
-        if allow_empty
-        else ("a non-empty string", lambda s: s != "")
-    )
-    if aide == "":
-        aide = f"enter {value_type}"
-    p_func = partial(process, str, valid_f)
+    p_func = partial(process, str, lambda s: s != "")
     return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
-def char(question, aide="enter a single character", allow_empty=False, **kwargs):
+def char(question, aide="enter a single character", **kwargs):
     """Asks user for a single character response."""
-    comparison = partial(contains, (0, 1)) if allow_empty else partial(eq, 1)
-    p_func = partial(process, str, lambda s: comparison(len(s)))
+    p_func = partial(process, str, lambda s: len(s) == 1)
     return ask(question, aide=aide, process_func=p_func, **kwargs)
 
 
