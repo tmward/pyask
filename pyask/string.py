@@ -2,7 +2,6 @@
 
 from functools import partial
 import re
-from operator import contains
 
 from .ask import ask
 from .utils import always_true, process
@@ -10,13 +9,13 @@ from .utils import always_true, process
 __all__ = ("string", "char", "yes_no", "string_regex")
 
 
-def string(question, aid="enter a string", **kwargs):
+def string(question, aid="any string", **kwargs):
     """Asks user for a string response."""
     p_func = partial(process, str, lambda s: s != "")
     return ask(question, aid=aid, process_func=p_func, **kwargs)
 
 
-def char(question, aid="enter a single character", **kwargs):
+def char(question, aid="single character", **kwargs):
     """Asks user for a single character response."""
     p_func = partial(process, str, lambda s: len(s) == 1)
     return ask(question, aid=aid, process_func=p_func, **kwargs)
