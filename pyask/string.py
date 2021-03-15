@@ -10,16 +10,16 @@ from .utils import always_true, process
 __all__ = ("string", "char", "yes_no", "string_regex")
 
 
-def string(question, aide="enter a string", **kwargs):
+def string(question, aid="enter a string", **kwargs):
     """Asks user for a string response."""
     p_func = partial(process, str, lambda s: s != "")
-    return ask(question, aide=aide, process_func=p_func, **kwargs)
+    return ask(question, aid=aid, process_func=p_func, **kwargs)
 
 
-def char(question, aide="enter a single character", **kwargs):
+def char(question, aid="enter a single character", **kwargs):
     """Asks user for a single character response."""
     p_func = partial(process, str, lambda s: len(s) == 1)
-    return ask(question, aide=aide, process_func=p_func, **kwargs)
+    return ask(question, aid=aid, process_func=p_func, **kwargs)
 
 
 def yes_no_to_bool(s):
@@ -27,10 +27,10 @@ def yes_no_to_bool(s):
     return {"yes": True, "y": True, "no": False, "n": False}[s.casefold()]
 
 
-def yes_no(question, aide="yes or no", **kwargs):
+def yes_no(question, aid="yes or no", **kwargs):
     """Asks user a yes or no question."""
     p_func = partial(process, yes_no_to_bool, always_true)
-    return ask(question, aide=aide, process_func=p_func, **kwargs)
+    return ask(question, aid=aid, process_func=p_func, **kwargs)
 
 def string_regex(regex, question, case_insensitive=False, **kwargs):
     """Asks user for a string response that must completely match the regex."""

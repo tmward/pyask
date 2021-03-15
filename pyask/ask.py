@@ -15,10 +15,10 @@ def print_choices(choices):
         print(f"({i:>{sig_figs}}) {choice}")
 
 
-def prompt(question, aide="", default=""):
+def prompt(question, aid="", default=""):
     """Constructs question prompt."""
-    if aide:
-        return f"{question.rstrip('?')}? ({aide}) [{default}] "
+    if aid:
+        return f"{question.rstrip('?')}? ({aid}) [{default}] "
     return f"{question.rstrip('?')}? [{default}] "
 
 
@@ -27,13 +27,13 @@ whatever = partial(process, str, always_true)
 
 # TODO add multi ask?
 # TODO fix spelling of aid :/
-def ask(question, aide="", default="", allow_empty=False, process_func=whatever, choices=None):
+def ask(question, aid="", default="", allow_empty=False, process_func=whatever, choices=None):
     """Returns user answer to question once they enter a valid response."""
     if choices is not None:
         print_choices(choices)
-    if allow_empty and not "empty response ok" in aide:
-        aide += "empty response ok" if aide == "" else ", empty response ok"
-    response = input(prompt(question, aide, default)).strip()
+    if allow_empty and not "empty response ok" in aid:
+        aid += "empty response ok" if aid == "" else ", empty response ok"
+    response = input(prompt(question, aid, default)).strip()
     if response == "":
         if allow_empty:
             return ""
@@ -42,4 +42,4 @@ def ask(question, aide="", default="", allow_empty=False, process_func=whatever,
         return process_func(response)
     except (KeyError, ValueError):
         print("Invalid respose.")
-        return ask(question, aide, default, allow_empty, process_func, choices)
+        return ask(question, aid, default, allow_empty, process_func, choices)
