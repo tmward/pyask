@@ -35,7 +35,7 @@ def ask(question, aid="", default="", allow_empty=False, process_func=whatever, 
     response = input(prompt(question, aid, default)).strip()
     if response == "":
         if allow_empty:
-            return ""
+            return None
         response = default
     try:
         return process_func(response)

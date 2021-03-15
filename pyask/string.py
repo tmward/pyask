@@ -30,7 +30,8 @@ def yes_no_to_bool(s):
 def yes_no(question, aid="yes or no", **kwargs):
     """Asks user a yes or no question."""
     p_func = partial(process, yes_no_to_bool, always_true)
-    return ask(question, aid=aid, process_func=p_func, **kwargs)
+    return ask(question, aid=aid, process_func=p_func, allow_empty=False, **kwargs)
+
 
 def string_regex(regex, question, case_insensitive=False, **kwargs):
     """Asks user for a string response that must completely match the regex."""

@@ -11,11 +11,12 @@ __all__ = ("which", "which_items")
 
 def which(xs, question, aid="pick a number", **kwargs):
     """Ask user to select an item from a sequence and returns that item."""
-    return xs[
-        number_between(
-            0, len(xs) - 1, question, aid=aid, only_int=True, choices=xs, **kwargs
-        )
-    ]
+    n = number_between(
+        0, len(xs) - 1, question, aid=aid, only_int=True, choices=xs, **kwargs
+    )
+    if n is None:
+        return None
+    return xs[n]
 
 
 def which_items(
@@ -28,7 +29,7 @@ def which_items(
     else:
         validf = lambda ns: ns_between(0, len(xs) - 1, ns) and len(ns) == len(set(ns))
     p_func = partial(process, partial(items, func=int), validf)
-    return [
-        xs[i]
-        for i in ask(question, aid=aid, process_func=p_func, choices=xs, **kwargs)
-    ]
+    ns = ask(question, aid=aid, process_func=p_func, choices=xs, **kwargs)
+    if ns is None:
+        return None
+    return [xs[n] for n in ns]
