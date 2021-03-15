@@ -26,12 +26,11 @@ whatever = partial(process, str, always_true)
 
 
 # TODO add multi ask?
-# TODO fix spelling of aid :/
 def ask(question, aid="", default="", allow_empty=False, process_func=whatever, choices=None):
     """Returns user answer to question once they enter a valid response."""
     if choices is not None:
         print_choices(choices)
-    if allow_empty and not "empty response ok" in aid:
+    if allow_empty and "empty response ok" not in aid:
         aid += "empty response ok" if aid == "" else ", empty response ok"
     response = input(prompt(question, aid, default)).strip()
     if response == "":
