@@ -384,12 +384,12 @@ and validate it with any regex you can think of.
 The example below checks for a string that ends in "mp4", "avi", or "mov" and is case-insensitive:
 
 ```
->>> pyask.string_regex(r"(?i).+mp4|avi|mov$", "What is a valid video filename")
+>>> pyask.string_regex(r"(?i).+(mp4|avi|mov)$", "What is a valid video filename")
 What is a valid video filename? [] myvideo.docx
 Invalid respose.
 What is a valid video filename? [] myvideo.MP4
 'myvideo.MP4'
->>> pyask.string_regex(r"(?i).+mp4|avi|mov$", "What is a valid video filename")
+>>> pyask.string_regex(r"(?i).+(mp4|avi|mov)$", "What is a valid video filename")
 What is a valid video filename? [] myvideo.mp4
 'myvideo.mp4'
 ```
