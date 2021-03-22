@@ -31,15 +31,17 @@ ask(question, aid="", default="", allow_empty=False, process_func=whatever, choi
     "What is your favorite color" are equivalent.
 2. `aid`: Optional and defaults to an empty string.
     Provides user with aid to answer the question. So setting
-    `aid="primary color"` to the above question will ask the user
+    `aid="primary color"` to the above question will ask the user\
     `What is your favorite color? (primary color)`.
 3. `default`: Optional and defaults to an empty string. Whatever you
    provide will be the assumed answer from the user if they simply hit
    `Enter` at the prompt rather than providing an answer.
    Providing a default response will prevent the user from entering a blank response.
+   Providing a default of "blue" to the above question would prompt:\
+   `What is your favorite color? (primary color) [blue]`
 4. `allow_empty`: Optional and defaults to `False`.
     Setting it to `True` will prevent the user from entering a blank response
-    (remember, if you provide a `default` then the user will not be able to enter a blank response`.
+    (remember, if you provide a `default` then the user will not be able to enter a blank response).
 5. `process_func`: Defaults to `whatever`,
     a function that keeps the user's answer and returns it as is.
     It is easy to build an appropriate `process_func` using `pyask.utils.process()`.
@@ -75,14 +77,13 @@ casts it as an integer, then returns it if it's positive.
 
 ## Convenience functions
 Having to build a `process_func` for `ask()` would be cumbersome.
-I created various convenience functions which take the exact same arguments
-as `ask()` but can ask users common questions.
-Examples are below.
+I created various convenience functions which ask users common questions.
+All these convenience functions take the same arguments as `ask()`,
+but some may require additional arguments (see below).
 
-### `pyask.numeric`
+## Number convenience functions in `pyask.numeric`
 
-Contains convenience functions for asking the user number questions.
-These include:
+### `decimal()`
 
 ```
 decimal(question, aid='enter a decimal', **kwargs)
@@ -100,11 +101,15 @@ How tall are you? (in cm) [5] 7.8
 7.8
 ```
 
+### `integer()`
+
 ```
 integer(question, aid='enter an integer', **kwargs)
 ```
 
 Asks user for an integer (a float/decimal response is illegal and not accepted).
+
+### `number()`
 
 ```
 number(question, aid='enter a number', **kwargs)
@@ -113,6 +118,8 @@ number(question, aid='enter a number', **kwargs)
 Asks user for any number, and returns an integer if an integer was given
 or a float if a float was given.
 
+### `number_between()`
+
 ```
 number_between(l, r, question, aid='', only_int=False, **kwargs)
 ```
@@ -120,10 +127,14 @@ Asks user for a number between l and r, inclusive.
 `only_int` allows you to accept only an integer response
 if `True` or accept decimals/floats if `False` (default).
 
+### `number_eq_to()`
+
 ```
 number_eq_to(n, question, aid='enter the correct number', **kwargs)
 ```
 Asks user for number equal to n.
+
+### `number_greater_than()`
 
 ```
 number_greater_than(l, question, aid='', only_int=False, **kwargs)
@@ -133,6 +144,8 @@ Asks user for number greater than l.
 `only_int` allows you to accept only an integer response
 if `True` or accept decimals/floats if `False` (default).
 
+### `number_greater_than_or_eq()`
+
 ```
 number_greater_than_or_eq(l, question, aid='', only_int=False, **kwargs)
 ```
@@ -140,6 +153,8 @@ number_greater_than_or_eq(l, question, aid='', only_int=False, **kwargs)
 Asks user for number greater than or equal to l.
 `only_int` allows you to accept only an integer response
 if `True` or accept decimals/floats if `False` (default).
+
+### `number_less_than()`
 
 ```
 number_less_than(r, question, aid='', only_int=False, **kwargs)
@@ -149,11 +164,15 @@ Asks user for number less than r.
 `only_int` allows you to accept only an integer response
 if `True` or accept decimals/floats if `False` (default).
 
+### `number_less_than_or_eq()`
+
 ```
 number_less_than_or_eq(r, question, aid='', only_int=False, **kwargs)
 ```
 
 Asks user for number less than or equal to r.
+
+### `seconds()`
 
 ```
 seconds(question, aid='enter time in HH:MM:SS, MM:SS, or SS format', **kwargs)
@@ -163,6 +182,7 @@ Asks user for time. Time can be in HH:MM:SS, MM:SS, or SS format.
 SS format takes any number of positive seconds.
 MM:SS and HH:MM:SS must have MM and SS between 0 and 59 (inclusive).
 HH can be any positive number or zero.
+It returns the time (seconds).
 
 # Contributions/suggestions
 
