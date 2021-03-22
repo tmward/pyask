@@ -159,7 +159,7 @@ partial(process, int, lambda x: x > 0)
 Which would create a function that takes a string,
 casts it as an integer, then returns it if it's positive.
 
-## Convenience functions
+# Convenience functions
 Having to build a `process_func` for `ask()` would be cumbersome.
 I created various convenience functions which ask users common questions.
 All these convenience functions take the same arguments as `ask()`,
@@ -167,9 +167,9 @@ but some may require additional arguments (see below).
 All the convenience functions are available at the top level of the package
 (as in, can be called with `pyask.decimal` rather than `pyask.numeric.decimal`.
 
-## Number convenience functions in `pyask.numeric`
+# Number convenience functions in `pyask.numeric`
 
-### `decimal()`
+## `decimal()`
 
 ```
 decimal(question, aid='enter a decimal', **kwargs)
@@ -187,7 +187,7 @@ How tall are you? (in cm) [5] 7.8
 7.8
 ```
 
-### `integer()`
+## `integer()`
 
 ```
 integer(question, aid='enter an integer', **kwargs)
@@ -195,7 +195,7 @@ integer(question, aid='enter an integer', **kwargs)
 
 Asks user for an integer (a float/decimal response is illegal and not accepted).
 
-### `number()`
+## `number()`
 
 ```
 number(question, aid='enter a number', **kwargs)
@@ -204,7 +204,7 @@ number(question, aid='enter a number', **kwargs)
 Asks user for any number, and returns an integer if an integer was given
 or a float if a float was given.
 
-### `number_between()`
+## `number_between()`
 
 ```
 number_between(l, r, question, aid='', only_int=False, **kwargs)
@@ -213,14 +213,14 @@ Asks user for a number between l and r, inclusive.
 `only_int` allows you to accept only an integer response
 if `True` or accept decimals/floats if `False` (default).
 
-### `number_eq_to()`
+## `number_eq_to()`
 
 ```
 number_eq_to(n, question, aid='enter the correct number', **kwargs)
 ```
 Asks user for number equal to n.
 
-### `number_greater_than()`
+## `number_greater_than()`
 
 ```
 number_greater_than(l, question, aid='', only_int=False, **kwargs)
@@ -230,7 +230,7 @@ Asks user for number greater than l.
 `only_int` allows you to accept only an integer response
 if `True` or accept decimals/floats if `False` (default).
 
-### `number_greater_than_or_eq()`
+## `number_greater_than_or_eq()`
 
 ```
 number_greater_than_or_eq(l, question, aid='', only_int=False, **kwargs)
@@ -240,7 +240,7 @@ Asks user for number greater than or equal to l.
 `only_int` allows you to accept only an integer response
 if `True` or accept decimals/floats if `False` (default).
 
-### `number_less_than()`
+## `number_less_than()`
 
 ```
 number_less_than(r, question, aid='', only_int=False, **kwargs)
@@ -250,7 +250,7 @@ Asks user for number less than r.
 `only_int` allows you to accept only an integer response
 if `True` or accept decimals/floats if `False` (default).
 
-### `number_less_than_or_eq()`
+## `number_less_than_or_eq()`
 
 ```
 number_less_than_or_eq(r, question, aid='', only_int=False, **kwargs)
@@ -258,7 +258,7 @@ number_less_than_or_eq(r, question, aid='', only_int=False, **kwargs)
 
 Asks user for number less than or equal to r.
 
-### `seconds()`
+## `seconds()`
 
 ```
 seconds(question, aid='enter time in HH:MM:SS, MM:SS, or SS format', **kwargs)
@@ -270,9 +270,9 @@ MM:SS and HH:MM:SS must have MM and SS between 0 and 59 (inclusive).
 HH can be any positive number or zero.
 It returns the time (seconds).
 
-## Filepath convenience functions in `pyask.path`
+# Filepath convenience functions in `pyask.path`
 
-### `dirname()`
+## `dirname()`
 
 ```
 dirname(question, aid='directory name', absolute=False, must_exist=False, **kwargs)
@@ -282,7 +282,7 @@ Asks user for directory name, returns path.
 `absolute` when `True` will return an absolute path rather than a relative one.
 `must_exist` when `True` will only let the user enter in the path of an existing directory.
 
-### `filename()`
+## `filename()`
 
 ```
 filename(question, aid='filename', absolute=False, must_exist=False, **kwargs)
@@ -292,7 +292,7 @@ Asks user for filename, returns path.
 `absolute` when `True` will return an absolute path rather than a relative one.
 `must_exist` when `True` will only let the user enter in the path of an existing file.
 
-### `pathname()`
+## `pathname()`
 
 ```
 pathname(question, aid='pathname', absolute=False, must_exist=False, **kwargs)
@@ -302,11 +302,11 @@ Asks user for pathname (either file or directory), returns path.
 `absolute` when `True` will return an absolute path rather than a relative one.
 `must_exist` when `True` will only let the user enter in the path of an existing file or directory.
 
-## Selection convenience functions in `pyask.selection`
+# Selection convenience functions in `pyask.selection`
 
 Contains functions that prompt a user to select from a list of questions.
 
-### `which()`
+## `which()`
 
 ```
 which(xs, question, aid='pick a number', **kwargs)
@@ -326,7 +326,7 @@ Which letter? (pick a number) [2]
 'c'
 ```
 
-### `which_items()`
+## `which_items()`
 
 ```
 which_items(xs, question, aid='space/comma separated number(s)', allow_repeats=True, **kwargs)
@@ -350,11 +350,11 @@ What videos, in order, should be stitched together? (space/comma separated numbe
 ['video1.mp4', 'video2.mp4', 'video3.mp4', 'video_4.mp4']
 ```
 
-## String convenience functions in `pyask.string`
+# String convenience functions in `pyask.string`
 
 Contains functions that prompt a user to select from a list of questions.
 
-### `any_string()`
+## `any_string()`
 
 ```
 any_string(question, aid='any string', **kwargs)
@@ -362,7 +362,7 @@ any_string(question, aid='any string', **kwargs)
 
 Asks user for a string response.
 
-### `char()`
+## `char()`
 
 ```
 char(question, aid='single character', **kwargs)
@@ -370,7 +370,7 @@ char(question, aid='single character', **kwargs)
 
 Asks user for a single character response.
 
-### `string_regex()`
+## `string_regex()`
 
 ```
 string_regex(regex, question, case_insensitive=False, **kwargs)
@@ -394,7 +394,7 @@ What is a valid video filename? [] myvideo.mp4
 'myvideo.mp4'
 ```
 
-### `yes_no()`
+## `yes_no()`
 
 ```
 yes_no(question, aid='yes or no', **kwargs)
@@ -417,7 +417,7 @@ Here's a snack.
 >>>
 ```
 
-# Contributions/suggestions
+ Contributions/suggestions
 
 Contributions and suggestions are welcome.
 Feel free to raise an [issue](https://github.com/tmward/pyask/issues)
