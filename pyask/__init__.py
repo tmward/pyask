@@ -1,6 +1,6 @@
 """Module to ask users questions and validate their responses."""
 
-__version__ = "0.1.8"
+__version__ = "0.1.9"
 
 from .ask import *
 from .numeric import *
