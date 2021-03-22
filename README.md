@@ -5,6 +5,54 @@ and validate their responses.
 It is pure Python (3.6+)
 and requires no dependencies beyond the standard library.
 
+# Brief Overview
+
+Do you wish you could easily ask a user a question
+and keep on asking it until they give a valid response?
+Now you can! Here's an example of asking the user for a
+time duration in seconds:
+
+```
+>>> answer = pyask.seconds("How long is the game?")
+How long is the game? (enter time in HH:MM:SS, MM:SS, or SS format) [] -10
+Invalid respose.
+How long is the game? (enter time in HH:MM:SS, MM:SS, or SS format) [] 10:61
+Invalid respose.
+How long is the game? (enter time in HH:MM:SS, MM:SS, or SS format) [] 10:59
+>>> answer
+659
+>>> type(answer)
+<class 'int'>
+>
+```
+
+Note that it checked to make sure the answer was a valid timestamp
+and continued to ask the user until they gave a valid response.
+It then returned an integer so you can immediately put their response to use in your program.
+
+Here's another example, this time asking a user to select the filenames for videos to concatenate together.
+Note that videos are not named nicely, so sorting them alphabetically and putting them together would scramble the video!
+Also note that there are non-video files you would not want to put together in the directory:
+
+```
+>>> pyask.which_items(os.listdir(), "What videos, in order, should be stitched together?")
+Available choices are:
+(0) video1.mp4
+(1) video3.mp4
+(2) usb.txt
+(3) video2.mp4
+(4) video_4.mp4
+What videos, in order, should be stitched together? (space/comma separated number(s), repeats ok) [] 0 3 1 4
+['video1.mp4', 'video2.mp4', 'video3.mp4', 'video_4.mp4']
+```
+
+It returns a nice list in the order the user specified.
+They can also use commas and any variable number of spaces to separate items.
+
+The package can ask many types of questions about numbers,
+strings, selecting multiple items, and filenames.
+Please see below for more information.
+
 # Installation
 
 `pyask` is available on the Python Package Index (PyPI) and
