@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "pyask"
-version = "0.1.8"
+version = "0.1.9"
 description = "Library for terminal programs to ask users questions."
 authors = ["Thomas M Ward <thomas@thomasward.com>"]
-license = "ISCL"
+license = "ISC License"
 readme = "README.md"
 repository = "https://github.com/tmward/pyask"
 

@@ -25,7 +25,9 @@ def prompt(question, aid="", default=""):
 whatever = partial(process, str, always_true)
 
 
-def ask(question, aid="", default="", allow_empty=False, process_func=whatever, choices=None):
+def ask(
+    question, aid="", default="", allow_empty=False, process_func=whatever, choices=None
+):
     """Returns user answer to question once they enter a valid response."""
     if choices is not None:
         print_choices(choices)
