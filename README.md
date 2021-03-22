@@ -232,6 +232,38 @@ MM:SS and HH:MM:SS must have MM and SS between 0 and 59 (inclusive).
 HH can be any positive number or zero.
 It returns the time (seconds).
 
+## Filepath convenience functions in `pyask.path`
+
+### `dirname()`
+
+```
+dirname(question, aid='directory name', absolute=False, must_exist=False, **kwargs)
+```
+
+Asks user for directory name, returns path.
+`absolute` when `True` will return an absolute path rather than a relative one.
+`must_exist` when `True` will only let the user enter in the path of an existing directory.
+
+### `filename()`
+
+```
+filename(question, aid='filename', absolute=False, must_exist=False, **kwargs)
+```
+
+Asks user for filename, returns path.
+`absolute` when `True` will return an absolute path rather than a relative one.
+`must_exist` when `True` will only let the user enter in the path of an existing file.
+
+### `pathname()`
+
+```
+pathname(question, aid='pathname', absolute=False, must_exist=False, **kwargs)
+```
+
+Asks user for pathname (either file or directory), returns path.
+`absolute` when `True` will return an absolute path rather than a relative one.
+`must_exist` when `True` will only let the user enter in the path of an existing file or directory.
+
 # Contributions/suggestions
 
 Contributions and suggestions are welcome.
