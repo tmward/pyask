@@ -105,6 +105,8 @@ ask(question, aid="", default="", allow_empty=False, process_func=whatever, choi
 it will inform the user it is not valid then redo the prompt.
 This can continue indefinitely until the user provides a valid response.
 
+Empty responses return `None`.
+
 ## `process()`
 
 ```
@@ -128,6 +130,8 @@ Having to build a `process_func` for `ask()` would be cumbersome.
 I created various convenience functions which ask users common questions.
 All these convenience functions take the same arguments as `ask()`,
 but some may require additional arguments (see below).
+All the convenience functions are available at the top level of the package
+(as in, can be called with `pyask.decimal` rather than `pyask.numeric.decimal`.
 
 ## Number convenience functions in `pyask.numeric`
 
@@ -263,6 +267,42 @@ pathname(question, aid='pathname', absolute=False, must_exist=False, **kwargs)
 Asks user for pathname (either file or directory), returns path.
 `absolute` when `True` will return an absolute path rather than a relative one.
 `must_exist` when `True` will only let the user enter in the path of an existing file or directory.
+
+## Selection convenience functions in `pyask.selection`
+
+Contains functions that prompt a user to select from a list of questions.
+
+### `which()`
+
+```
+which(xs, question, aid='pick a number', **kwargs)
+```
+
+Ask user to select an item from the sequence `xs` and returns that item.
+
+### `which_items()`
+
+```
+which_items(xs, question, aid='space/comma separated number(s)', allow_repeats=True, **kwargs)
+```
+
+Ask user to select multiple items from the sequence `xs`,
+by specifying a comma or space delimited response.
+If `allow_repeats` is `True`, they can specify the same item multiple times.
+
+Example:
+
+```
+>>> pyask.which_items(os.listdir(), "What videos, in order, should be stitched together?")
+Available choices are:
+(0) video1.mp4
+(1) video3.mp4
+(2) usb.txt
+(3) video2.mp4
+(4) video_4.mp4
+What videos, in order, should be stitched together? (space/comma separated number(s), repeats ok) [] 0, 3, 1, 4
+['video1.mp4', 'video2.mp4', 'video3.mp4', 'video_4.mp4']
+```
 
 # Contributions/suggestions
 
