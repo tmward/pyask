@@ -316,6 +316,73 @@ What videos, in order, should be stitched together? (space/comma separated numbe
 ['video1.mp4', 'video2.mp4', 'video3.mp4', 'video_4.mp4']
 ```
 
+## String convenience functions in `pyask.string`
+
+Contains functions that prompt a user to select from a list of questions.
+
+### `any_string()`
+
+```
+any_string(question, aid='any string', **kwargs)
+```
+
+Asks user for a string response.
+
+### `char()`
+
+```
+char(question, aid='single character', **kwargs)
+```
+
+Asks user for a single character response.
+
+### `string_regex()`
+
+```
+string_regex(regex, question, case_insensitive=False, **kwargs)
+```
+
+Asks user for a string response that must completely match the regex.
+The regex must be in standard
+[Python regex](https://docs.python.org/3/library/re.html?highlight=re#module-re).
+This allows you to easily ask any possible variant of a question
+and validate it with any regex you can think of.
+The example below checks for a string that ends in "mp4", "avi", or "mov" and is case-insensitive:
+
+```
+>>> pyask.string_regex(r"(?i).+mp4|avi|mov$", "What is a valid video filename")
+What is a valid video filename? [] myvideo.docx
+Invalid respose.
+What is a valid video filename? [] myvideo.MP4
+'myvideo.MP4'
+>>> pyask.string_regex(r"(?i).+mp4|avi|mov$", "What is a valid video filename")
+What is a valid video filename? [] myvideo.mp4
+'myvideo.mp4'
+```
+
+### `yes_no()`
+
+```
+yes_no(question, aid='yes or no', **kwargs)
+```
+
+Asks user a yes or no question.
+Accepts "yes", "y", "no", or "n" in any case (so "YES" or "YeS" works).
+Returns a boolean.
+
+Example:
+
+```
+>>> if pyask.yes_no("Are you hungry"):
+...     print("Here's a snack.")
+... else:
+...     print("You don't need a snack.")
+...
+Are you hungry? (yes or no) [] yes
+Here's a snack.
+>>>
+```
+
 # Contributions/suggestions
 
 Contributions and suggestions are welcome.
