@@ -1,3 +1,37 @@
+# Table of Contents
+
+* [pyask](#pyask)
+* [Brief Overview](#brief-overview)
+* [Installation](#installation)
+* [Use](#use)
+  * [ask()](#ask)
+  * [process()](#process)
+  * [Convenience functions](#convenience-functions)
+  * [Number convenience functions in pyask\.numeric](#number-convenience-functions-in-pyasknumeric)
+    * [decimal()](#decimal)
+    * [integer()](#integer)
+    * [number()](#number)
+    * [number\_between()](#number_between)
+    * [number\_eq\_to()](#number_eq_to)
+    * [number\_greater\_than()](#number_greater_than)
+    * [number\_greater\_than\_or\_eq()](#number_greater_than_or_eq)
+    * [number\_less\_than()](#number_less_than)
+    * [number\_less\_than\_or\_eq()](#number_less_than_or_eq)
+    * [seconds()](#seconds)
+  * [Filepath convenience functions in pyask\.path](#filepath-convenience-functions-in-pyaskpath)
+    * [dirname()](#dirname)
+    * [filename()](#filename)
+    * [pathname()](#pathname)
+  * [Selection convenience functions in pyask\.selection](#selection-convenience-functions-in-pyaskselection)
+    * [which()](#which)
+    * [which\_items()](#which_items)
+  * [String convenience functions in pyask\.string](#string-convenience-functions-in-pyaskstring)
+    * [any\_string()](#any_string)
+    * [char()](#char)
+    * [string\_regex()](#string_regex)
+    * [yes\_no()](#yes_no)
+* [Contributions/suggestions](#contributionssuggestions)
+
 # `pyask`
 
 A python library for terminal programs to ask users questions
@@ -368,7 +402,7 @@ yes_no(question, aid='yes or no', **kwargs)
 
 Asks user a yes or no question.
 Accepts "yes", "y", "no", or "n" in any case (so "YES" or "YeS" works).
-Returns a boolean.
+Returns a boolean. Nice to use in control-flow logic. 
 
 Example:
 
