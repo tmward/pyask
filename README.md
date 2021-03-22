@@ -280,6 +280,18 @@ which(xs, question, aid='pick a number', **kwargs)
 
 Ask user to select an item from the sequence `xs` and returns that item.
 
+Example, with a default answer of 2 and the user hitting `Enter` to use the default answer:
+
+```
+>>> pyask.which(['a', 'b', 'c'], "Which letter?", default="2")
+Available choices are:
+(0) a
+(1) b
+(2) c
+Which letter? (pick a number) [2]
+'c'
+```
+
 ### `which_items()`
 
 ```
