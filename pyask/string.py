@@ -6,10 +6,10 @@ import re
 from .ask import ask
 from .utils import always_true, process
 
-__all__ = ("string", "char", "yes_no", "string_regex")
+__all__ = ("any_string", "char", "yes_no", "string_regex")
 
 
-def string(question, aid="any string", **kwargs):
+def any_string(question, aid="any string", **kwargs):
     """Asks user for a string response."""
     p_func = partial(process, str, lambda s: s != "")
     return ask(question, aid=aid, process_func=p_func, **kwargs)
