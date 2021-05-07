@@ -34,10 +34,12 @@ def ask(
     if allow_empty and "empty response ok" not in aid:
         aid += "empty response ok" if aid == "" else ", empty response ok"
     response = input(prompt(question, aid, default)).strip()
+    response = default if response == "" else response
     if response == "":
         if allow_empty:
             return None
-        response = default
+        print("Blank responses not allowed.")
+        return ask(question, aid, default, allow_empty, process_func, choices)
     try:
         return process_func(response)
     except (KeyError, ValueError):
